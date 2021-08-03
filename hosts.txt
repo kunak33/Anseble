@@ -1,7 +1,9 @@
 [staging_servers]
 
-linuxX	ansible_host=172.16.10.161 ansible_user=dlap ansible_ssh_private_key_file=/home/dlap/.ssh/id_rsa
+linuxD	ansible_host=172.16.10.161 
+linuxU	ansible_host=172.16.10.188 ansible_python_interpreter=/usr/bin/python3
 
-[prod_servers]
-linuxU	ansible_host=172.16.10.188 ansible_python_interpreter=/usr/bin/python3 ansible_user=kunak33 ansible_ssh_private_key_file=/home/dlap/.ssh/id_rsa
+[staging_servers:vars]
+ansible_user=dlap 
+ansible_ssh_private_key_file=/home/dlap/.ssh/id_rsa
 
