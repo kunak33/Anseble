@@ -1,8 +1,4 @@
-[staging_servers]
-
+[STANDING_SERVERS]
 linuxD		ansible_host=172.16.10.161 
 linuxCli	ansible_host=172.16.10.193 
 
-[staging_servers:vars]
-ansible_user=dlap 
-ansible_ssh_private_key_file=/home/dlap/.ssh/id_rsa
