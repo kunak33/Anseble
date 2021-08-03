@@ -1,7 +1,7 @@
 [staging_servers]
 
-linuxD	ansible_host=172.16.10.161 
-linuxU	ansible_host=172.16.10.188 ansible_python_interpreter=/usr/bin/python3
+linuxD		ansible_host=172.16.10.161 
+linuxCli	ansible_host=172.16.10.193 
 
 [staging_servers:vars]
 ansible_user=dlap 
