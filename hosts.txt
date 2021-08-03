@@ -6,4 +6,3 @@ linuxU	ansible_host=172.16.10.188 ansible_python_interpreter=/usr/bin/python3
 [staging_servers:vars]
 ansible_user=dlap 
 ansible_ssh_private_key_file=/home/dlap/.ssh/id_rsa
-
