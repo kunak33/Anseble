@@ -1,0 +1,18 @@
+---
+- name: install Apache and Upload my web Page
+  hosts: all
+  becomt: yes
+
+
+  vars:
+    source_file: ./MyWebSite/index.html
+    destin_file: /var/www/html
+
+
+  tasks:
+  - name: Install Apache Web server
+    yum:  name=apache2 state=latest
+
+
+  - name: Copy MyHomePAge to servers
+    copy: src={{ source_file }} dest={{  destin_file  }} mode=0555
