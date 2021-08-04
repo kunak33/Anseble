@@ -1,0 +1,44 @@
+---
+- name: install Apache and Upload my web Page
+  hosts: all
+  become: yes
+ 
+  vars:
+    source_file: ./MyWebSite/index.html
+    destin_file: /var/www/html
+
+
+  tasks:
+  - name: Check and Print Linix version
+    debug: var=ansible_os_family
+ 
+  - block: #====Block FOr Debian=====#
+ 
+     - name: Install Apache Web server for Debian
+       yum:  name=apache2 state=latest
+     
+     - name: Copy MyHomePAge to servers
+       copy: src={{ source_file }} dest={{  destin_file  }} mode=0555
+       notify: Restart Apache
+    
+     - name: Start WebServer for Debian
+       service: name=apache2 state=started enabled=yes
+    when: ansible_os_family == "Debian" 
+
+
+  - block: #===Block For NO_Debian===#
+
+     - name : Install apache web server for NoDebian
+       apt:   name=httpd state=latest
+ 
+     - name: Start WebServer For noDebian
+       service: name=httpd state=started enabled=yes
+       notify: Restart Apache No Deb
+    when: ansible_os_family == "OpenSUS"
+
+  handlers:
+   - name: Restart Apache
+     service: name=apache2 state=restarted
+   
+   - name: Restart Apache No Deb
+     service: name=httpd state=restarted
