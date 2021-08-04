@@ -3,58 +3,8 @@
   hosts: all
   become: yes
   
-  vars:
-     source_folder: ./MyWebSite2
-     destin_folder:  /var/www/html 
+  roles:
+    - { role: deploy_apache_web, when: ansible_system == 'Linux' }
+#    - deploy_db
+#    - confige
  
-  tasks:
-  - name: Check and Print Linix version
-    debug: var=ansible_os_family
- 
-  - block: #====Block FOr Debian=====#
- 
-      - name: Install Apache Web server for Debian
-        yum:  name=apache2 state=latest 
-            
-      - name: Start WebServer for Debian
-        service: name=apache2 state=started enabled=yes
-
-    when: ansible_os_family == "Debian"  
- 
-  - block: #===Block For NO_Debian===#
-
-      - name : Install apache web server for NoDebian
-        apt:   name=httpd state=latest
- 
-      - name: Start WebServer For noDebian
-        service: name=httpd state=started enabled=yes 
-
-    when: ansible_os_family == "OpenSUS"
-
-  - name: Generate INDEX.HTML file
-    template: src={{ source_folder }}/index.j2 dest={{ destin_folder}}/index.html  mode=055
-    notify:
-       - Restart Apache
-       - Restart Apache No Deb
-  - name: Copy MyHomePAge to servers
-    copy: src={{ source_folder }}/{{ item }} dest={{  destin_folder }} mode=0555
-    loop:
-   #   - "index.html"
-      - "bahamas.png"
-      - "bulgaria.png"
-      - "jordan.png"
-      - "newzeland.png"
-
-    notify: 
-       - Restart Apache
-       - Restart Apache No Deb
-
-  handlers:
-    - name: Restart Apache
-      service: name=apache2 state=restarted
-      when: ansible_os_family == "Debian"
-
-    - name: Restart Apache No Deb
-      service: name=httpd state=restarted
-      when: ansible_os_family == "OpenSUS"
-
