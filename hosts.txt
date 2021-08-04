@@ -1,4 +1,4 @@
 [STANDING_SERVERS]
-linuxD		ansible_host=172.16.10.161  owner=Main
-linuxCli	ansible_host=172.16.10.193  owner=Tester
+linuxD		ansible_host=172.16.10.161  owner=Main		owner=Petya
+linuxCli	ansible_host=172.16.10.193  owner=Tester        owner=Vasya
 #inuxU		ansible_host=172.16.10.188  ansible_python_interpreter=/usr/bin/python3
