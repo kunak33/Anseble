@@ -1,0 +1,33 @@
+---
+- name: My veriblues
+  hosts: all
+  become: yes
+  
+
+  vars:
+    messege1: Privet
+    messege2: World
+    secret  : XCXCXCXC
+  
+  tasks:
+  
+  - name: Print Secret varieble
+    debug:
+      var: secret 
+   
+
+  - debug:
+      msg: "Messege for debuging: {{ secret }}"
+
+  - debug:
+      msg: "Owner servera -->{{ owner }}<--"
+
+  - set_fact: full_messege="{{ messege1 }} {{ messege2 }} from {{ owner }}  "
+ 
+
+  - debug:
+      var: full_messege
+
+
+  - debug:
+      var: ansible_distribution
