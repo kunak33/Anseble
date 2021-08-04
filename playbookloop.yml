@@ -1,0 +1,25 @@
+---
+- name: Loops Playbook
+  hosts: linuxD
+  become: yes
+
+  tasks:
+   - name: Say hello to ALL
+     debug: msg=" Hello {{ item }}"
+     loop:
+        - "Vasya"
+        - "Petya"
+        - "Masha"
+        - "Olya"
+
+
+   - name: Loop Untill examlpe
+     shell: echo -n Z >> myfile.txt && cat myfile.txt
+     register: output
+     delay: 2
+     retries: 10
+     until: output.stdout.find("ZZZZ") == false
+   
+   - name: Print Final output
+     debug: 
+       var: output.stdout
