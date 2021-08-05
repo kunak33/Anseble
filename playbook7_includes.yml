@@ -1,0 +1,18 @@
+---
+- name: My include playbook
+  hosts: all 
+  become: yes
+
+  vars:
+   mytext: "Privet ot deneelap"
+
+  tasks:
+  - name: Ping test
+    ping:
+
+  - name: Create Folders
+    include: crete_folders.yml
+
+  - name: Create files
+    include: create_files.yml  # mytext="ABOBA"
+
